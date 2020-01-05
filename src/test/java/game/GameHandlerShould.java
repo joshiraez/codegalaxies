@@ -16,7 +16,7 @@ final class GameHandlerShould {
         Game newGame = handler.createGameCPU(level);
 
         assertThat(newGame)
-                .as("Create CPU game %s level", level)
+                .as("Create CPU game %s level", level.name())
                 .isNotNull();
     }
 
@@ -26,11 +26,19 @@ final class GameHandlerShould {
         Game newGame = handler.createGameCPU(level);
 
         assertThat(newGame.getBoard())
-                .as("CPU game %s level has board", level)
+                .as("CPU game %s level has board", level.name())
                 .isNotNull();
     }
 
+    @ParameterizedTest
+    @EnumSource(value = CPULevel.class)
+    void thatNewGameCPUBoardHasTwoPlayers(CPULevel level) {
+        Game newGame = handler.createGameCPU(level);
 
+        assertThat(newGame.getBoard().getPlayers().size())
+                .as("CPU game %s level's board has 2 players", level.name())
+                .isEqualTo(2);
+    }
 
 //    @ParameterizedTest
 //    @EnumSource(value = CPULevel.class)

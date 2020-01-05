@@ -11,7 +11,7 @@ public class Game {
     public static Game ofCPULevel(CPULevel level) {
         Game game = new Game();
 
-        game.board = new Board();
+        game.board = Board.newOfCPULevel(level);
 
         return game;
     }
