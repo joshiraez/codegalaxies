@@ -4,16 +4,15 @@ import game.CPULevel;
 
 public class Game {
 
-    private Board board;
+    private final Board board;
 
-    private Game() {}
+    public Game(final Board board) {
+        this.board = board;
+    }
 
     public static Game ofCPULevel(CPULevel level) {
-        Game game = new Game();
 
-        game.board = Board.newOfCPULevel(level);
-
-        return game;
+        return new Game(Board.newOfCPULevel(level));
     }
 
     public Board getBoard() {

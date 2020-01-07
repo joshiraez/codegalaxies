@@ -3,14 +3,27 @@ package game;
 import game.model.CPUPlayer;
 import game.model.Game;
 import game.model.HumanPlayer;
+import game.model.PlayerFactory;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 final class GameHandlerShould {
 
-    private GameHandler handler = new GameHandler();
+    private PlayerFactory playerFactory = spy(new PlayerFactory());
+    private GameHandler handler = new GameHandler(playerFactory);
+
+    @Test
+    void delegateConstructionOfPlayerToPlayerFactory() {
+        //When
+        handler.createGameCPU(CPULevel.BEGINNER);
+        //Then
+        verify(playerFactory).getInitialHumanPlayer();
+    }
 
     @ParameterizedTest
     @EnumSource(value = CPULevel.class)
@@ -61,18 +74,6 @@ final class GameHandlerShould {
                 .as("CPU game %s level has player with starting resources")
                 .isEqualToComparingFieldByFieldRecursively(new HumanPlayer(2, 2, 1));
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //    @ParameterizedTest

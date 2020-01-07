@@ -18,6 +18,10 @@ public class Board {
         this.players = players;
     }
 
+    public Board(final HumanPlayer initialHumanPlayer, final CPUPlayer cpuPlayer) {
+        players = asList(initialHumanPlayer, cpuPlayer);
+    }
+
     public List<Player> getPlayers() {
         return players;
     }

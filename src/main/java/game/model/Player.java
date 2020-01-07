@@ -1,4 +1,4 @@
 package game.model;
 
-interface Player {
+public interface Player {
 }
