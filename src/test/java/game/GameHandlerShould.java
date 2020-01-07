@@ -2,6 +2,7 @@ package game;
 
 import game.model.CPUPlayer;
 import game.model.Game;
+import game.model.HumanPlayer;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
@@ -47,10 +48,19 @@ final class GameHandlerShould {
         Game newGame = handler.createGameCPU(level);
 
         assertThat(newGame.getBoard().getPlayers().get(1))
-                .as("CPU game %s level's has cpu player of level %s", level, level)
-                .isEqualToComparingFieldByFieldRecursively(CPUPlayer.ofLevel(level));
+                .as("CPU game %s level has cpu player of level %s", level, level)
+                .isEqualToComparingFieldByFieldRecursively(CPUPlayer.initialCPUPlayer(level));
     }
 
+    @ParameterizedTest
+    @EnumSource(value = CPULevel.class)
+    void thatNewGameCPUPlayer1IsAPlayerWithTheStartingResources(CPULevel level) {
+        Game newGame = handler.createGameCPU(level);
+
+        assertThat(newGame.getBoard().getPlayers().get(0))
+                .as("CPU game %s level has player with starting resources")
+                .isEqualToComparingFieldByFieldRecursively(new HumanPlayer(2, 2, 1));
+    }
 
 
 

@@ -2,8 +2,11 @@ package game.model;
 
 import game.CPULevel;
 
-import java.util.Arrays;
 import java.util.List;
+
+import static game.model.CPUPlayer.initialCPUPlayer;
+import static game.model.HumanPlayer.initialHumanPlayer;
+import static java.util.Arrays.asList;
 
 public class Board {
 
@@ -20,7 +23,7 @@ public class Board {
     }
 
     static Board newOfCPULevel(final CPULevel level) {
-        return new Board(Arrays.asList(new Player(), CPUPlayer.ofLevel(level)));
+        return new Board(asList(initialHumanPlayer(), initialCPUPlayer(level)));
     }
 
 }

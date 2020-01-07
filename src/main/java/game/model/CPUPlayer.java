@@ -2,7 +2,7 @@ package game.model;
 
 import game.CPULevel;
 
-public class CPUPlayer extends Player {
+public class CPUPlayer implements Player {
 
     private final CPULevel level;
 
@@ -10,7 +10,7 @@ public class CPUPlayer extends Player {
         this.level = level;
     }
 
-    public static CPUPlayer ofLevel(final CPULevel level) {
+    public static CPUPlayer initialCPUPlayer(final CPULevel level) {
         return new CPUPlayer(level);
     }
 }
