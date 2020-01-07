@@ -17,14 +17,6 @@ final class GameHandlerShould {
     private PlayerFactory playerFactory = spy(new PlayerFactory());
     private GameHandler handler = new GameHandler(playerFactory);
 
-    @Test
-    void delegateConstructionOfPlayerToPlayerFactory() {
-        //When
-        handler.createGameCPU(CPULevel.BEGINNER);
-        //Then
-        verify(playerFactory).getInitialHumanPlayer();
-    }
-
     @ParameterizedTest
     @EnumSource(value = CPULevel.class)
     void thatNewGameCPUBringsANewGameForEachCPULevel(CPULevel level) {
@@ -33,6 +25,14 @@ final class GameHandlerShould {
         assertThat(newGame)
                 .as("Create CPU game %s level", level)
                 .isNotNull();
+    }
+
+    @Test
+    void delegateConstructionOfHumanPlayerToPlayerFactory() {
+        //When
+        handler.createGameCPU(CPULevel.BEGINNER);
+        //Then
+        verify(playerFactory).getInitialHumanPlayer();
     }
 
     @ParameterizedTest
