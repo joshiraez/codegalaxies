@@ -1,5 +1,6 @@
 package game;
 
+import game.model.CPUPlayer;
 import game.model.Game;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
@@ -16,7 +17,7 @@ final class GameHandlerShould {
         Game newGame = handler.createGameCPU(level);
 
         assertThat(newGame)
-                .as("Create CPU game %s level", level.name())
+                .as("Create CPU game %s level", level)
                 .isNotNull();
     }
 
@@ -26,7 +27,7 @@ final class GameHandlerShould {
         Game newGame = handler.createGameCPU(level);
 
         assertThat(newGame.getBoard())
-                .as("CPU game %s level has board", level.name())
+                .as("CPU game %s level has board", level)
                 .isNotNull();
     }
 
@@ -36,9 +37,33 @@ final class GameHandlerShould {
         Game newGame = handler.createGameCPU(level);
 
         assertThat(newGame.getBoard().getPlayers().size())
-                .as("CPU game %s level's board has 2 players", level.name())
+                .as("CPU game %s level's board has 2 players", level)
                 .isEqualTo(2);
     }
+
+    @ParameterizedTest
+    @EnumSource(value = CPULevel.class)
+    void thatNewGameCPUPlayer2IsACPUPlayerOfTheGivenLevel(CPULevel level) {
+        Game newGame = handler.createGameCPU(level);
+
+        assertThat(newGame.getBoard().getPlayers().get(1))
+                .as("CPU game %s level's has cpu player of level %s", level, level)
+                .isEqualToComparingFieldByFieldRecursively(CPUPlayer.ofLevel(level));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //    @ParameterizedTest
 //    @EnumSource(value = CPULevel.class)

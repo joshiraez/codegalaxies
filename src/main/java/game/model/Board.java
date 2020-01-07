@@ -11,16 +11,16 @@ public class Board {
 //    private Planets planets;
 //    private ActionPanel actionPanel;
 
+    private Board(final List<Player> players) {
+        this.players = players;
+    }
+
     public List<Player> getPlayers() {
         return players;
     }
 
-    public static Board newOfCPULevel(CPULevel level) {
-        Board newBoard = new Board();
-
-        newBoard.players = Arrays.asList(new Player(), new Player());
-
-        return newBoard;
+    static Board newOfCPULevel(final CPULevel level) {
+        return new Board(Arrays.asList(new Player(), CPUPlayer.ofLevel(level)));
     }
 
 }
