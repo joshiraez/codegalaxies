@@ -37,6 +37,15 @@ final class GameHandlerShould {
 
     @ParameterizedTest
     @EnumSource(value = CPULevel.class)
+    void delegateConstructionOfCPUPlayerToPlayerFactory(CPULevel level) {
+        //When
+        handler.createGameCPU(level);
+        //Then
+        verify(playerFactory).getInitialCPUPlayer(level);
+    }
+
+    @ParameterizedTest
+    @EnumSource(value = CPULevel.class)
     void thatNewGameCPUHasABoard(CPULevel level) {
         Game newGame = handler.createGameCPU(level);
 
