@@ -1,11 +1,14 @@
 package game.model;
 
 import game.CPULevel;
+import game.ColonyEffect;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.emptyList;
 
 class PlayerFactoryShould {
 
@@ -29,6 +32,19 @@ class PlayerFactoryShould {
         //Then
         assertThat(humanPlayer)
                 .as("CPU game %s level has player with starting resources")
-                .isEqualToComparingFieldByFieldRecursively(new HumanPlayer(2, 2, 1));
+                .isEqualToComparingFieldByFieldRecursively(
+                        humanPlayerWithExpectedStartingResources()
+                );
+    }
+
+    private HumanPlayer humanPlayerWithExpectedStartingResources() {
+        return new HumanPlayer(
+                1,
+                2,
+                2,
+                1,
+                asList(ColonyEffect.LEVEL_UP_ONLY_ONE_RESOURCE),
+                emptyList()
+        );
     }
 }
