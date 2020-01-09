@@ -7,12 +7,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 final class GameHandlerShould {
 
-    private PlayerFactory playerFactory = spy(new PlayerFactory());
+    private PlayerFactory playerFactory = mock(PlayerFactory.class);
     private DeckFactory deckFactory = spy(new DeckFactory());
     private GameHandler handler = new GameHandler(playerFactory, deckFactory);
 
