@@ -1,5 +1,6 @@
 package game;
 
+import game.model.Deck;
 import game.model.Game;
 import game.model.PlayerFactory;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,9 @@ import org.junit.jupiter.params.provider.EnumSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 final class GameHandlerShould {
 
@@ -92,6 +95,36 @@ final class GameHandlerShould {
         handler.createGameCPU(CPULevel.BEGINNER);
         //Then
         verify(deckFactory).getGalaxyDeck();
+    }
+
+    @ParameterizedTest
+    @EnumSource(value = CPULevel.class)
+    void thatNewGameCardsComeFromAShuffledDeck(CPULevel level) {
+        //Given
+        final Deck mockedDeck = mock(Deck.class);
+        final GalaxyCard firstCardFromTheTopOfTheDeck = new GalaxyCard();
+        final GalaxyCard secondCardFromTheTopOfTheDeck = new GalaxyCard();
+        final GalaxyCard thirdCardFromTheTopOfTheDeck = new GalaxyCard();
+        final GalaxyCard fourthCardFromTheTopOfTheDeck = new GalaxyCard();
+
+        //When
+        when(mockedDeck.draw())
+                .thenReturn(firstCardFromTheTopOfTheDeck)
+                .thenReturn(secondCardFromTheTopOfTheDeck)
+                .thenReturn(thirdCardFromTheTopOfTheDeck)
+                .thenReturn(fourthCardFromTheTopOfTheDeck);
+        when(deckFactory.getGalaxyDeck()).thenReturn(mockedDeck);
+        final Game gameCPU = handler.createGameCPU(level);
+
+        //Then
+        verify(mockedDeck).shuffle();
+        verify(mockedDeck, times(4)).draw();
+        assertThat(gameCPU.getBoard().getCards())
+                .as("The board of level %s contains the drawed galaxy cards from the deck")
+                .containsExactlyInAnyOrder(firstCardFromTheTopOfTheDeck,
+                        secondCardFromTheTopOfTheDeck,
+                        thirdCardFromTheTopOfTheDeck,
+                        fourthCardFromTheTopOfTheDeck);
     }
 
 //    @ParameterizedTest

@@ -22,7 +22,9 @@ public class GameHandler {
         final HumanPlayer initialHumanPlayer = playerFactory.getInitialHumanPlayer();
         final CPUPlayer cpuPlayer = playerFactory.getInitialCPUPlayer(level);
         final Deck deck = deckFactory.getGalaxyDeck();
-        final Board board = new Board(initialHumanPlayer, cpuPlayer);
+        deck.shuffle();
+        final Board board = new Board(initialHumanPlayer, cpuPlayer,
+                deck.draw(), deck.draw(), deck.draw(), deck.draw());
         return new Game(board, deck);
     }
 }
