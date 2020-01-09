@@ -10,17 +10,19 @@ import game.model.PlayerFactory;
 public class GameHandler {
 
     private final PlayerFactory playerFactory;
+    private final DeckFactory deckFactory;
 
-    public GameHandler(final PlayerFactory playerFactory) {
+    public GameHandler(final PlayerFactory playerFactory, final DeckFactory deckFactory) {
 
         this.playerFactory = playerFactory;
+        this.deckFactory = deckFactory;
     }
 
     public Game createGameCPU(CPULevel level) {
         final HumanPlayer initialHumanPlayer = playerFactory.getInitialHumanPlayer();
         final CPUPlayer cpuPlayer = playerFactory.getInitialCPUPlayer(level);
+        final Deck deck = deckFactory.getGalaxyDeck();
         final Board board = new Board(initialHumanPlayer, cpuPlayer);
-        final Deck deck = new Deck();
         return new Game(board, deck);
     }
 }

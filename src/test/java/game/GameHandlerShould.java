@@ -13,7 +13,8 @@ import static org.mockito.Mockito.verify;
 final class GameHandlerShould {
 
     private PlayerFactory playerFactory = spy(new PlayerFactory());
-    private GameHandler handler = new GameHandler(playerFactory);
+    private DeckFactory deckFactory = spy(new DeckFactory());
+    private GameHandler handler = new GameHandler(playerFactory, deckFactory);
 
     @ParameterizedTest
     @EnumSource(value = CPULevel.class)
@@ -84,7 +85,13 @@ final class GameHandlerShould {
                 .isNotNull();
     }
 
-
+    @Test
+    void thatGameHandlerDelegatesTheGenerationOfDeckToDeckFactory() {
+        //When
+        handler.createGameCPU(CPULevel.BEGINNER);
+        //Then
+        verify(deckFactory).getGalaxyDeck();
+    }
 
 //    @ParameterizedTest
 //    @EnumSource(value = CPULevel.class)
