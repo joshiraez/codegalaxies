@@ -9,6 +9,7 @@ public class HumanPlayer implements Player {
 
     private final int level;
     private final int ships;
+    private final int dice;
     private final int energy;
     private final int culture;
     private final List<ColonyEffect> colonyActions;
@@ -17,16 +18,17 @@ public class HumanPlayer implements Player {
     public HumanPlayer(
             final int level,
             final int ships,
+            final int dice,
             final int energy,
             final int culture,
             final List<ColonyEffect> colonyActions,
             final List<GalaxyCard> capturedCards) {
         this.level = level;
         this.ships = ships;
+        this.dice = dice;
         this.energy = energy;
         this.culture = culture;
         this.colonyActions = colonyActions;
         this.capturedCards = capturedCards;
     }
-
 }

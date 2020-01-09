@@ -11,6 +11,7 @@ public class PlayerFactory {
         return new HumanPlayer(
                 1,
                 2,
+                4,
                 2,
                 1,
                 asList(ColonyEffect.LEVEL_UP_ONLY_ONE_RESOURCE),
