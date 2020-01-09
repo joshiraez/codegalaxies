@@ -62,6 +62,29 @@ final class GameHandlerShould {
                 .isEqualTo(2);
     }
 
+    @ParameterizedTest
+    @EnumSource(value = CPULevel.class)
+    void thatNewGameCPUBoardHas4Cards(CPULevel level) {
+        //When
+        final Game gameCPU = handler.createGameCPU(level);
+        //Then
+        assertThat(gameCPU.getBoard().getCards().size())
+                .as("CPU game %s level's board has 4 galaxy cards", level)
+                .isEqualTo(4);
+    }
+
+    @ParameterizedTest
+    @EnumSource(value = CPULevel.class)
+    void thatNewGameHasADeckOfGalaxyCards(CPULevel level) {
+        //When
+        final Game gameCPU = handler.createGameCPU(CPULevel.BEGINNER);
+        //Then
+        assertThat(gameCPU.getDeck())
+                .as("CPU game %s level has a deck", level)
+                .isNotNull();
+    }
+
+
 
 //    @ParameterizedTest
 //    @EnumSource(value = CPULevel.class)

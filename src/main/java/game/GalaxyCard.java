@@ -1,4 +1,4 @@
 package game;
 
-public enum GalaxyCard {
+public class GalaxyCard {
 }

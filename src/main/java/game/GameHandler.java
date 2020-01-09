@@ -2,6 +2,7 @@ package game;
 
 import game.model.Board;
 import game.model.CPUPlayer;
+import game.model.Deck;
 import game.model.Game;
 import game.model.HumanPlayer;
 import game.model.PlayerFactory;
@@ -19,7 +20,7 @@ public class GameHandler {
         final HumanPlayer initialHumanPlayer = playerFactory.getInitialHumanPlayer();
         final CPUPlayer cpuPlayer = playerFactory.getInitialCPUPlayer(level);
         final Board board = new Board(initialHumanPlayer, cpuPlayer);
-        return new Game(board);
+        final Deck deck = new Deck();
+        return new Game(board, deck);
     }
-
 }

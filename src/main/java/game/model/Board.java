@@ -1,5 +1,8 @@
 package game.model;
 
+import game.GalaxyCard;
+
+import java.util.Arrays;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -16,5 +19,14 @@ public class Board {
 
     public List<Player> getPlayers() {
         return players;
+    }
+
+    public List<GalaxyCard> getCards() {
+        return Arrays.asList(
+                new GalaxyCard(),
+                new GalaxyCard(),
+                new GalaxyCard(),
+                new GalaxyCard()
+        );
     }
 }
