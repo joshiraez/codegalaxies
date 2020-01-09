@@ -77,7 +77,7 @@ final class GameHandlerShould {
     @EnumSource(value = CPULevel.class)
     void thatNewGameHasADeckOfGalaxyCards(CPULevel level) {
         //When
-        final Game gameCPU = handler.createGameCPU(CPULevel.BEGINNER);
+        final Game gameCPU = handler.createGameCPU(level);
         //Then
         assertThat(gameCPU.getDeck())
                 .as("CPU game %s level has a deck", level)
