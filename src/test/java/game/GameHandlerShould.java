@@ -127,6 +127,16 @@ final class GameHandlerShould {
                         fourthCardFromTheTopOfTheDeck);
     }
 
+    @ParameterizedTest
+    @EnumSource(value = CPULevel.class)
+    void thatNewGameHasAnActivationBayForManagingDice(CPULevel level) {
+        //When
+        final Game gameCPU = handler.createGameCPU(level);
+        //Then
+        assertThat(gameCPU.getActivationBay())
+                .as("The board of level %s contains an activation bay for managing dice")
+                .isNotNull();
+    }
 //    @ParameterizedTest
 //    @EnumSource(value = CPULevel.class)
 //    void thatNewGameCPUHasABoard(CPULevel level) {

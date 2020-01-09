@@ -17,4 +17,8 @@ public class Game {
     public Deck getDeck() {
         return deck;
     }
+
+    public ActivationBay getActivationBay() {
+        return new ActivationBay();
+    }
 }
